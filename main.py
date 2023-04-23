@@ -43,6 +43,13 @@ async def userinfo(ctx, member: discord.Member):
     embed.add_field(name="ID", value=user.id, inline=True)
     embed.add_field(name="Статус", value=user.status, inline=True)
     embed.add_field(name="Ведущая роль", value=user.top_role.name, inline=True)
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $userinfo {member}\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.send(embed=embed)
 
 
@@ -58,18 +65,31 @@ async def servinfo(ctx):
         color=discord.Color.random()
     )
     embed.set_thumbnail(url=icon)
-    embed.add_field(name="Owner", value=owner, inline=True)
-    embed.add_field(name="Server ID", value=id, inline=True)
-    embed.add_field(name='Created At:', value=ctx.guild.created_at.strftime('Day: %d/%m/%Y Hour: %H:%M:%S %p'),
+    embed.add_field(name="Владелец", value=owner, inline=True)
+    embed.add_field(name="ID сервера", value=id, inline=True)
+    embed.add_field(name='Создан в:', value=ctx.guild.created_at.strftime('Day: %d/%m/%Y Hour: %H:%M:%S %p'),
                     inline=False)
-    embed.add_field(name="Member Count", value=memberCount, inline=True)
-
+    embed.add_field(name="Количество участников", value=memberCount, inline=True)
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $servinfo\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.send(embed=embed)
 
 
 # ЗАДЕРЖКА_ОТПРАВКИ
 @bot.command()
 async def ping(ctx):
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $ping\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.send('Ping {0}'.format(round(bot.latency, 5)))
 
 
@@ -97,6 +117,13 @@ async def help_us(ctx):
     emb.add_field(name='{}ping'.format(config['prefix']), value='Вывод задержки сообщений')
     emb.add_field(name='{}servinfo'.format(config['prefix']), value='Выводит информацию о сервере')
     emb.add_field(name='{}rand_st'.format(config['prefix']), value='Случайный стикер')
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $help_us\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.send(embed=emb)
 
 
@@ -119,9 +146,15 @@ async def help_mod(ctx):
                       value='Удаление возможности писать в чат')
         emb.add_field(name='{}unmute (user)'.format(config['prefix']), value='Разрешение на общение в чате')
         await ctx.send(embed=emb)
-
     else:
         await ctx.reply('Данная команда не работает на этом канале')
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $help_mod\n')
+    f.write('-------------------------------------------\n')
+    f.close()
 
 
 @bot.command()
@@ -149,6 +182,13 @@ async def help_adm(ctx):
         await ctx.send(embed=emb)
     else:
         await ctx.reply('Данная команда не работает на этом канале')
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $help_adm\n')
+    f.write('-------------------------------------------\n')
+    f.close()
 
 
 # РАБОТА_С_ПОЛЬЗОВАТЕЛЕМ
@@ -157,11 +197,25 @@ async def avatar(ctx, *, member: discord.Member = None):
     if not member:
         member = ctx.message.author
     userAvatar = member.avatar.url
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $avatar {member}\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.send(userAvatar)
 
 
 @bot.command()
 async def rand(ctx, *args):
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $rand\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.reply(random.randint(0, 1000000))
 
 
@@ -170,6 +224,13 @@ dashes = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685']
 
 @bot.command()
 async def roll_dice(ctx, count):
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $roll_dice {count}\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     res = [random.choice(dashes) for _ in range(int(count))]
     await ctx.send(" ".join(res))
 
@@ -180,6 +241,13 @@ async def Pepe(ctx):
                            '<a:3330pepescam:1099580928671625296>', '<a:3254pepepoggerditto:1099580917384744980>',
                            '<a:3135pepegamble:1099580873378111529>', '<a:1649pepehappychat:1099580125600829450>',
                            '<a:1899pepepoop:1099580841581096970>', "https://i.imgur.com/Hab3RJO.jpg"))
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $Pepe\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.send(stick)
 
 
@@ -187,6 +255,13 @@ async def Pepe(ctx):
 async def help_me(ctx):
     embed = discord.Embed(title='ОБЯЗАТЕЛЬНО \nК ПРОСМОТРУ', colour=discord.Colour.blue())
     embed.add_field(name='', value='https://www.youtube.com/watch?v=XQYNUwYHV1c')
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $help_me\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.reply(embed=embed)
 
 
@@ -208,12 +283,26 @@ async def gtn(ctx, num):
                            f'У тебя было число {num}')
     else:
         await ctx.reply('Данная команда не работает на этом канале')
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $gtn {num}\n')
+    f.write('-------------------------------------------\n')
+    f.close()
 
 
 # ЗАДАЧИ_МОДЕРА_АДМИНА
 @bot.command()
 @commands.has_role("Moderation")
 async def clear(ctx, amount=100):
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $clear\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.channel.purge(limit=amount)
 
 
@@ -226,6 +315,13 @@ async def test(ctx):
 # РАБОТА_С_ПОЛЬЗОВАТЕЛЕМ
 @bot.command()
 async def CaD(ctx):
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $CaD\n')
+    f.write('-------------------------------------------\n')
+    f.close()
     await ctx.send('https://i.imgur.com/FZEztL9.mp4')
 
 
@@ -273,6 +369,13 @@ async def rps(ctx, rps):
                 await ctx.send(f"Ну что ж, мы пытались.\nТвой выбор: {user_choice}\nМой выбор: {comp_choice}")
     else:
         await ctx.reply('Данная команда не работает на этом канале')
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $rps {rps}\n')
+    f.write('-------------------------------------------\n')
+    f.close()
 
 
 # МУЗЫКА
@@ -302,6 +405,13 @@ async def play(ctx, *url):
             await ctx.reply('Данная команда не работает на этом звуковом канале')
     else:
         await ctx.reply('Данная команда не работает на этом канале')
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $play\n')
+    f.write('-------------------------------------------\n')
+    f.close()
 
 
 @bot.command()
@@ -312,6 +422,13 @@ async def stop_m(ctx):
         await voice_channel.disconnect()
     else:
         await ctx.reply('Данная команда не работает на этом канале')
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $stop_m\n')
+    f.write('-------------------------------------------\n')
+    f.close()
 
 
 # ЗАДАЧА_МОДЕРАЦИИ
@@ -467,6 +584,13 @@ async def rand_st(ctx):
                        '<:4482pepehi:1099580987194740797>', '<:4687pepeangrycry:1099580995910504559>',
                        '<:5432pepegambling:1099581014717771887>', '<:5457pepeiseeu:1099581024314339338>',
                        '<:5854pepefishing:1099581033885749248>')))
+    f = open('data.txt', 'a+')
+    f.write('-------------------------------------------\n')
+    f.write(f'{time.strftime("Day: %d/%m/%Y Hour: %H:%M:%S %p")}\n')
+    f.write(f'{ctx.author} ({ctx.author.top_role.name})\n')
+    f.write(f'Команда: $rand_st\n')
+    f.write('-------------------------------------------\n')
+    f.close()
 
 
 bot.run(config['token'])
