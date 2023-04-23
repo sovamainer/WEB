@@ -15,7 +15,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 
 config = {
-    'token': 'MTA4NTQwNjc4MDgyNzM4NTg4Ng.GfcqpK.CxmQ6lED8Q5RWfhn5sbQy-5Cp93O7vNute2ATE',
+    'token': '',
     'prefix': '$',
 }
 
