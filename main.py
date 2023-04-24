@@ -27,6 +27,8 @@ FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconne
 
 @bot.event
 async def on_ready():
+    f = open('data.txt', 'r+')
+    f.truncate(0)
     print(f'{bot.user.name} запустился и готов к работе!')
 
 
@@ -384,10 +386,10 @@ async def play(ctx, *url):
     if ctx.channel.id == 1098948139710419066:
         if 'музыка' in str(ctx.author.voice.channel):
             vc = await ctx.message.author.voice.channel.connect()
-            print(url)
+            a = ''.join([*url])
             with YoutubeDL(YDL_OPTIONS) as ydl:
-                if 'https://' in url:
-                    info = ydl.extract_info(url, download=False)
+                if 'https://' in a:
+                    info = ydl.extract_info(a, download=False)
                 else:
                     info = ydl.extract_info(f"ytsearch:{' '.join([*url])}", download=False)['entries'][0]
             link = info['formats'][0]['url']
